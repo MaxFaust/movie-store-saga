@@ -5,7 +5,7 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
-//search request from GIPHY API
+//search request
 router.post('/api/', (req, res) => {
     console.log('Hamburger?', req.body)
     axios.get(`/`)
