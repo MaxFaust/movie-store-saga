@@ -16,10 +16,11 @@ class Home extends Component {
     }
 
     render() {
-        console.log('Movie array:', this.props.movieList)
+        // console.log('Movie array:', this.props.movieList)
 
         return (
 
+            //Movie array with all movie table information
             <Box width="90%" margin="auto" align="center" >
                 {this.props.movieList.map(item => <MovieItem key={item.id} title={item.title} poster={item.poster} description={item.description} />)}
 

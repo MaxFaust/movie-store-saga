@@ -15,6 +15,17 @@ import { takeEvery, put } from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('GET_MOVIES', getMovies);
+    yield takeEvery('DETAILS', putMovieDetail);
+}
+
+//TODO- Fix sending post to router
+function* putMovieDetail(action) {
+    try {
+        const response = yield axios.post('/details', action.payload);
+        // yield put({ type: 'GET_GENRES'})
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 function* getMovies() {
@@ -31,7 +42,7 @@ function* getMovies() {
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
+// store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
@@ -41,10 +52,20 @@ const movies = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// navigate to the details page
+const edits = (state = [], action) => {
+    switch (action.type) {
+        case 'DETAILS':
             return action.payload;
         default:
             return state;
@@ -56,6 +77,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        edits
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

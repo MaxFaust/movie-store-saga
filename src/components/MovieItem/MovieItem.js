@@ -1,32 +1,13 @@
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import Card from '@material-ui/core/Card';
-
-// const mapStateToProps = reduxState => ({
-//     movieList: reduxState.movies,
-// });
-
-// class MovieItem extends Component {
-
-//     render() {
-//         return (
-//             <Card>
-//             </Card>
-//         );
-//     }
-// }
-
-// export default connect(mapStateToProps)(MovieItem);
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid'
+import { connect } from 'react-redux';
+
 
 
 const useStyles = makeStyles({
@@ -44,10 +25,24 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MediaCard(key) {
+function MediaCard(key) {
+
+    console.log('HIT', key)
+
+
+    //GO to details page
+    const handleClick = (event) => {
+        event.preventDefault();
+        console.log('Dispatching movie details payload:', key);
+
+        //TODO-  HIT table join through "router.get('/details'... "
+        key.dispatch({ type: 'DETAILS', payload: key.title});
+        // this.props.history.push('/details');
+
+    }
     const classes = useStyles();
 
-    console.log('Movies in MovieItem:', key)
+    // console.log('Movies in MovieItem:', key)
     return (
         <Grid className={classes.grid}>
             <Card className={classes.root}>
@@ -56,6 +51,9 @@ export default function MediaCard(key) {
                         className={classes.media}
                         image={key.poster}
                         title="Movie Poster"
+
+                        //GO to details page
+                        onClick={handleClick}
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
@@ -66,13 +64,14 @@ export default function MediaCard(key) {
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Button size="small" color="primary" key={key.title}>
-                        Edit
-        </Button>
-                </CardActions>
             </Card>
         </Grid>
 
     );
 }
+
+const mapReduxStateToProps = reduxState => ({
+    movieList: reduxState.movies,
+});
+
+export default connect(mapReduxStateToProps)(MediaCard)
