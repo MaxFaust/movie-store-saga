@@ -22,6 +22,7 @@ class Home extends Component {
 
             <Box width="90%" margin="auto" align="center" >
                 {this.props.movieList.map(item => <MovieItem key={item.id} title={item.title} poster={item.poster} description={item.description} />)}
+
             </Box >
         );
     }

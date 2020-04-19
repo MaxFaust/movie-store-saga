@@ -30,21 +30,26 @@ import Grid from '@material-ui/core/Grid'
 
 
 const useStyles = makeStyles({
+    grid: {
+        display: 'flex'
+    },
     root: {
-        maxWidth: 345,
+        flexGrow: 1,
+        maxWidth: 400,
+        margin: 20,
+
     },
     media: {
-        height: 100,
+        height: 400,
     },
 });
 
 export default function MediaCard(key) {
     const classes = useStyles();
 
-    console.log('HIT', key.title)
-
+    console.log('Movies in MovieItem:', key)
     return (
-        <Grid>
+        <Grid className={classes.grid}>
             <Card className={classes.root}>
                 <CardActionArea>
                     <CardMedia
@@ -62,7 +67,7 @@ export default function MediaCard(key) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
-                    <Button size="small" color="primary" name={key.title}>
+                    <Button size="small" color="primary" key={key.title}>
                         Edit
         </Button>
                 </CardActions>
