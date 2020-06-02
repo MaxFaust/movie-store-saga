@@ -2,7 +2,7 @@
 
 Duration: 1 Weekend Challenge
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it?
+The beginnings of Blockbuster, store and view movie information on a grid of poster cards.
 This project is a movie selection website that allows the user to view and edit a list of movies with their description.
 
 To see the fully functional site, please visit: DEPLOYED VERSION OF APP
